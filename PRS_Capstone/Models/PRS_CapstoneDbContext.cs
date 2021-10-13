@@ -16,7 +16,7 @@ namespace PRS_Capstone.Models
         public PRS_CapstoneDbContext(DbContextOptions<PRS_CapstoneDbContext> options)
             : base(options) { }
 
-        // for fluid API:
+        // for fluent API:
         protected override void OnModelCreating(ModelBuilder builder) {
             builder.Entity<User>(e => {
                 e.ToTable("Users"); // Table name
