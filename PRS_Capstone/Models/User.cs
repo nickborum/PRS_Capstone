@@ -10,7 +10,6 @@ namespace PRS_Capstone.Models
 {
     public class User {
         public int Id { get; set; }
-        // used lambda code through Flui API instead of using attributes here
         public string Username { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

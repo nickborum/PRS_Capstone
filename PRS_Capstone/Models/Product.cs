@@ -14,6 +14,7 @@ namespace PRS_Capstone.Models
         public string PhotoPath { get; set; }
         public virtual Vendor Vendor { get; set; }
         public int VendorId { get; set; }
+        public virtual IEnumerable<RequestLine> RequestLines { get; set; }
         public Product() { }
     }
 }

@@ -11,7 +11,6 @@ namespace PRS_Capstone.Models
     public class Vendor{
 
         public int Id { get; set; }
-        // used lambda code through Flui API instead of using attributes here
         public string Code { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }

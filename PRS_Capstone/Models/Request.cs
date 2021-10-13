@@ -18,6 +18,8 @@ namespace PRS_Capstone.Models
 
         public int UserId { get; set; }
 
+        public virtual IEnumerable<RequestLine> RequestLines { get; set; }
+
         //public virtual IEnumerable<User> Users { get; set; }
         public Request() { }
     }

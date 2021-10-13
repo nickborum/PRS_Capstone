@@ -70,6 +70,19 @@ namespace PRS_Capstone.Models
                 e.Property(p => p.PhotoPath).HasMaxLength(225);
                 e.HasOne(p => p.Vendor).WithMany(p => p.Products).HasForeignKey(p => p.VendorId).OnDelete(DeleteBehavior.Restrict);
             });
+
+            builder.Entity<RequestLine>(e => {
+                e.ToTable("Requestlines");
+                e.HasKey(p => p.Id);
+                e.Property(p => p.Quantity).IsRequired(true);
+                e.HasOne(p => p.Request).WithMany(p => p.RequestLines).HasForeignKey(p => p.RequestId).OnDelete(DeleteBehavior.Restrict);
+                e.HasOne(p => p.Product).WithMany(p => p.RequestLines).HasForeignKey(p => p.ProductId).OnDelete(DeleteBehavior.Restrict);
+
+            });
+
+
+
+
         }
 
     }
