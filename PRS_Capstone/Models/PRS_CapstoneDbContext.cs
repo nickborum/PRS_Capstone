@@ -44,6 +44,32 @@ namespace PRS_Capstone.Models
                 e.Property(p => p.Total).IsRequired(true);
                 e.HasOne(p => p.User).WithMany(p => p.Requests).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict);
             });
+
+            builder.Entity<Vendor>(e => {
+                e.ToTable("Vendors"); // Table name
+                e.HasKey(p => p.Id); // primary key
+                e.Property(p => p.Code).HasMaxLength(30).IsRequired(true);
+                e.HasIndex(p => p.Code).IsUnique(true);
+                e.Property(p => p.Name).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.Address).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.City).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.State).HasMaxLength(2).IsRequired(true);
+                e.Property(p => p.Zip).HasMaxLength(5);
+                e.Property(p => p.Phone).HasMaxLength(12);
+                e.Property(p => p.Email).HasMaxLength(255);
+
+            });
+
+            builder.Entity<Product>(e => {
+                e.ToTable("Products");
+                e.HasKey(p => p.Id);
+                e.Property(p => p.PartNbr).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.Name).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.Price).IsRequired(true);
+                e.Property(p => p.Unit).HasMaxLength(30).IsRequired(true);
+                e.Property(p => p.PhotoPath).HasMaxLength(225);
+                e.HasOne(p => p.Vendor).WithMany(p => p.Products).HasForeignKey(p => p.VendorId).OnDelete(DeleteBehavior.Restrict);
+            });
         }
 
     }
