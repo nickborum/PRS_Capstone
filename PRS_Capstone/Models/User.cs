@@ -20,6 +20,10 @@ namespace PRS_Capstone.Models
         public bool IsReviewer { get; set; }
         public bool IsAdmin { get; set; }
 
+        public virtual IEnumerable<Request> Requests { get; set; }
+
+        //public virtual Request Request { get; set; }
+
         public User() { }
     }
 }

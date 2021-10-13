@@ -42,7 +42,7 @@ namespace PRS_Capstone.Models
                 e.Property(p => p.DeliveryMode).HasMaxLength(20).IsRequired(true);
                 e.Property(p => p.Status).HasMaxLength(10).IsRequired(true);
                 e.Property(p => p.Total).IsRequired(true);
-                e.HasOne(p => p.User).WithMany(p => p.Requests);
+                e.HasOne(p => p.User).WithMany(p => p.Requests).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict);
             });
         }
 

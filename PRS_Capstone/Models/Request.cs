@@ -14,8 +14,11 @@ namespace PRS_Capstone.Models
         public string DeliveryMode { get; set; } = "Pick up";
         public string Status { get; set; } = "New";
         public decimal Total { get; set; }
+        public virtual User User { get; set; }
 
-        public virtual IEnumerable<User> User { get; set; }
+        public int UserId { get; set; }
+
+        //public virtual IEnumerable<User> Users { get; set; }
         public Request() { }
     }
 }
