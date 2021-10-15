@@ -15,9 +15,8 @@ namespace PRS_Capstone.Controllers
     {
         private readonly PRS_CapstoneDbContext _context;
 
-        [HttpPut("update/{requestId}")]
         
-         public async Task<IActionResult> RecalculateRequestTotal(int requestId)
+         private async Task<IActionResult> RecalculateRequestTotal(int requestId)
          {
              var request = await _context.Requests.FindAsync(requestId);
              if(request==null) {
@@ -77,6 +76,7 @@ namespace PRS_Capstone.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+                await RecalculateRequestTotal(requestLine.Request.Id);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -100,6 +100,7 @@ namespace PRS_Capstone.Controllers
         {
             _context.RequestLine.Add(requestLine);
             await _context.SaveChangesAsync();
+            await RecalculateRequestTotal(requestLine.Request.Id);
 
             return CreatedAtAction("GetRequestLine", new { id = requestLine.Id }, requestLine);
         }
@@ -116,6 +117,7 @@ namespace PRS_Capstone.Controllers
 
             _context.RequestLine.Remove(requestLine);
             await _context.SaveChangesAsync();
+            await RecalculateRequestTotal(requestLine.Request.Id);
 
             return NoContent();
         }
