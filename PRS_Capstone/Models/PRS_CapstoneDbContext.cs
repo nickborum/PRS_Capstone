@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PRS_Capstone.Models;
 
 namespace PRS_Capstone.Models
 {
@@ -84,6 +85,15 @@ namespace PRS_Capstone.Models
 
 
         }
+
+        // for fluent API:
+        public DbSet<PRS_Capstone.Models.RequestLine> RequestLine { get; set; }
+
+        // for fluent API:
+        public DbSet<PRS_Capstone.Models.Vendor> Vendor { get; set; }
+
+        // for fluent API:
+        public DbSet<PRS_Capstone.Models.Product> Product { get; set; }
 
     }
 }
