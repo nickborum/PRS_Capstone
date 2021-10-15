@@ -12,9 +12,9 @@ namespace PRS_Capstone.Models
         // DbSets go here
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
-        public DbSet<RequestLine> RequestLine { get; set; }
-        public DbSet<Vendor> Vendor { get; set; }
-        public DbSet<Product> Product { get; set; }
+        public virtual DbSet<RequestLine> RequestLine { get; set; }
+        public virtual DbSet<Vendor> Vendor { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
 
 
         public PRS_CapstoneDbContext(DbContextOptions<PRS_CapstoneDbContext> options)
