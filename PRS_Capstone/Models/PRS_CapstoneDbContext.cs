@@ -12,6 +12,9 @@ namespace PRS_Capstone.Models
         // DbSets go here
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Request> Requests { get; set; }
+        public DbSet<RequestLine> RequestLine { get; set; }
+        public DbSet<Vendor> Vendor { get; set; }
+        public DbSet<Product> Product { get; set; }
 
 
         public PRS_CapstoneDbContext(DbContextOptions<PRS_CapstoneDbContext> options)
@@ -81,19 +84,7 @@ namespace PRS_Capstone.Models
 
             });
 
-
-
-
         }
-
-        // for fluent API:
-        public DbSet<PRS_Capstone.Models.RequestLine> RequestLine { get; set; }
-
-        // for fluent API:
-        public DbSet<PRS_Capstone.Models.Vendor> Vendor { get; set; }
-
-        // for fluent API:
-        public DbSet<PRS_Capstone.Models.Product> Product { get; set; }
 
     }
 }
