@@ -15,7 +15,7 @@ namespace PRS_Capstone.Models
         public int ProductId { get; set; }
         public int Quantity { get; set; } = 1;
 
-        [JsonIgnore]
+        
         public virtual Product Product { get; set; }
 
         [JsonIgnore]

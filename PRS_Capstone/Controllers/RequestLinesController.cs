@@ -24,7 +24,8 @@ namespace PRS_Capstone.Controllers
              }
              // adds up the totals from request for 
              request.Total = (from rl in _context.RequestLine
-                              from prod in _context.Product
+                              join prod in _context.Product
+                              on rl.ProductId equals prod.Id
                               where rl.RequestId == requestId
                               select new
                               {
@@ -76,7 +77,7 @@ namespace PRS_Capstone.Controllers
             try
             {
                 await _context.SaveChangesAsync();
-                await RecalculateRequestTotal(requestLine.Request.Id);
+                await RecalculateRequestTotal(requestLine.RequestId);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -100,7 +101,7 @@ namespace PRS_Capstone.Controllers
         {
             _context.RequestLine.Add(requestLine);
             await _context.SaveChangesAsync();
-            await RecalculateRequestTotal(requestLine.Request.Id);
+            await RecalculateRequestTotal(requestLine.RequestId); ;
 
             return CreatedAtAction("GetRequestLine", new { id = requestLine.Id }, requestLine);
         }
@@ -117,7 +118,7 @@ namespace PRS_Capstone.Controllers
 
             _context.RequestLine.Remove(requestLine);
             await _context.SaveChangesAsync();
-            await RecalculateRequestTotal(requestLine.Request.Id);
+            await RecalculateRequestTotal(requestLine.RequestId); ;
 
             return NoContent();
         }

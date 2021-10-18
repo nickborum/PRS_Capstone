@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace PRS_Capstone.Models
@@ -14,13 +17,17 @@ namespace PRS_Capstone.Models
         public string DeliveryMode { get; set; } = "Pick up";
         public string Status { get; set; } = "New";
         public decimal Total { get; set; }
+
+      
         public virtual User User { get; set; }
 
+        
         public int UserId { get; set; }
 
+   
         public virtual IEnumerable<RequestLine> RequestLines { get; set; }
 
         //public virtual IEnumerable<User> Users { get; set; }
-        public Request() { }
+        //public Request() { }
     }
 }
