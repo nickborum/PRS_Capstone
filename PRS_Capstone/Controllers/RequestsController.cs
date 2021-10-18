@@ -32,11 +32,13 @@ namespace PRS_Capstone.Controllers
             return await PutRequest(request.Id, request);
         }
 
+        [HttpPut("approve")]
         public async Task<IActionResult> Approve(Request request){
             request.Status = "APPROVED";
             return await PutRequest(request.Id, request);
         }
 
+        [HttpPut("reject")]
         public async Task<IActionResult> Reject(Request request) {
             request.Status = "REJECTED";
             return await PutRequest(request.Id, request);
