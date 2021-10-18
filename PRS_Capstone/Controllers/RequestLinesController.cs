@@ -101,7 +101,7 @@ namespace PRS_Capstone.Controllers
         {
             _context.RequestLine.Add(requestLine);
             await _context.SaveChangesAsync();
-            await RecalculateRequestTotal(requestLine.RequestId); ;
+            await RecalculateRequestTotal(requestLine.RequestId);
 
             return CreatedAtAction("GetRequestLine", new { id = requestLine.Id }, requestLine);
         }

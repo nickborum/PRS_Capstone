@@ -14,6 +14,34 @@ namespace PRS_Capstone.Controllers
     public class RequestsController : ControllerBase
     {
         private readonly PRS_CapstoneDbContext _context;
+        
+        [HttpPut("review")]
+        public async Task<IActionResult> Review(Request request)
+        {
+            const int preapproved_total = 50;
+            // creates condition for pre-apporval, sets to review if over the preapproval amount
+            /* if(request.Total <= preapproved_total)
+             {
+                 request.Status = "APPROVED";
+             }
+             else{
+                 request.Status = "REVIEW";
+             }*/
+            request.Status = request.Total <= preapproved_total ? "APPROVED" : "REVIEW";
+
+            return await PutRequest(request.Id, request);
+        }
+
+        public async Task<IActionResult> Approve(Request request){
+            request.Status = "APPROVED";
+            return await PutRequest(request.Id, request);
+        }
+
+        public async Task<IActionResult> Reject(Request request) {
+            request.Status = "REJECTED";
+            return await PutRequest(request.Id, request);
+        }
+
 
         public RequestsController(PRS_CapstoneDbContext context)
         {
@@ -60,6 +88,8 @@ namespace PRS_Capstone.Controllers
 
             try
             {
+                /// need to verify this is the correct parameter
+                
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -84,6 +114,7 @@ namespace PRS_Capstone.Controllers
         {
             _context.Requests.Add(request);
             await _context.SaveChangesAsync();
+            
 
             return CreatedAtAction("GetRequest", new { id = request.Id }, request);
         }
@@ -100,6 +131,7 @@ namespace PRS_Capstone.Controllers
 
             _context.Requests.Remove(request);
             await _context.SaveChangesAsync();
+            
 
             return NoContent();
         }
