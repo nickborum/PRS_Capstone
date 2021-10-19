@@ -45,12 +45,12 @@ namespace PRS_Capstone.Controllers
         }
 
 
-        public RequestsController(PRS_CapstoneDbContext context)
-        {
+        public RequestsController(PRS_CapstoneDbContext context) {
             _context = context;
         }
 
         // GET: api/Requests
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Request>>> GetRequests()
         {
@@ -59,10 +59,9 @@ namespace PRS_Capstone.Controllers
                                     .ToListAsync();
         }
 
-        // GET: api/Requests/5
+        // GET: api/Requests/
         [HttpGet("{id}")]
-        public async Task<ActionResult<Request>> GetRequest(int id)
-        {
+        public async Task<ActionResult<Request>> GetRequest(int id) {
             var request = await _context.Requests
                                     .Include(x => x.User)
                                     .Include(x => x.RequestLines)
@@ -72,9 +71,25 @@ namespace PRS_Capstone.Controllers
             {
                 return NotFound();
             }
-
             return request;
         }
+        
+        [HttpGet("review/{id}")]
+
+        public async Task<ActionResult<IEnumerable<Request>>>GetReview(int id)
+        {
+            var requests = await _context.Requests
+                                    .Include(x => x.User)
+                                    //.Include(x => x.RequestLines)
+                                    .Where(x => x.Status == "REVIEW" && x.UserId != id)
+                                    .ToListAsync();
+
+            //var review = request.Status == "REVIEW";
+  
+            return Ok(requests);
+        }
+
+
 
         // PUT: api/Requests/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

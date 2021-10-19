@@ -41,6 +41,17 @@ namespace PRS_Capstone.Controllers
             return user;
         }
 
+        [HttpGet("{username}/{password}")]
+
+        public async Task<ActionResult<IEnumerable<Request>>> Login(string id, string id_pass)
+        {
+            var login = await _context.Users
+                                    .Where(x => x.Username == id && x.Password == id_pass)
+                                    .ToListAsync();
+
+            return Ok(login);
+        }
+
         // PUT: api/Users/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
