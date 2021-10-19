@@ -43,13 +43,14 @@ namespace PRS_Capstone.Controllers
 
         [HttpGet("{username}/{password}")]
 
-        public async Task<ActionResult<IEnumerable<Request>>> Login(string id, string id_pass)
+        public async Task<ActionResult<IEnumerable<User>>> Login(string username, string password)
         {
             var login = await _context.Users
-                                    .Where(x => x.Username == id && x.Password == id_pass)
-                                    .ToListAsync();
+                                   //.SingleOrDefaultAsync(x => x.Username == id_username && x.Password == id_password);
+                                   .Where(x => x.Username == username && x.Password == password)
+                                   .ToListAsync();
 
-            return Ok(login);
+            return login == null ? NotFound() : Ok(login);
         }
 
         // PUT: api/Users/5

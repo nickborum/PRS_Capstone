@@ -80,15 +80,10 @@ namespace PRS_Capstone.Controllers
         {
             var requests = await _context.Requests
                                     .Include(x => x.User)
-                                    //.Include(x => x.RequestLines)
                                     .Where(x => x.Status == "REVIEW" && x.UserId != id)
                                     .ToListAsync();
-
-            //var review = request.Status == "REVIEW";
-  
             return Ok(requests);
         }
-
 
 
         // PUT: api/Requests/5
