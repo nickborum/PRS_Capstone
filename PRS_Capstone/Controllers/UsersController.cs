@@ -46,9 +46,9 @@ namespace PRS_Capstone.Controllers
         public async Task<ActionResult<IEnumerable<User>>> Login(string username, string password)
         {
             var login = await _context.Users
-                                   //.SingleOrDefaultAsync(x => x.Username == id_username && x.Password == id_password);
-                                   .Where(x => x.Username == username && x.Password == password)
-                                   .ToListAsync();
+                                   .SingleOrDefaultAsync(x => x.Username == username && x.Password == password);
+                                   //.Where(x => x.Username == username && x.Password == password)
+                                   //.ToListAsync();
 
             return login == null ? NotFound() : Ok(login);
         }
